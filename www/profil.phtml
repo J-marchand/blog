@@ -1,0 +1,203 @@
+<link rel="stylesheet" href="css/profil.css">
+
+<?php if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'writer' || $_SESSION['role'] == 'moderateur'): ?>
+    <div class="container">
+        <div class="post_bloc">
+            <section class="post_bloc_section">
+                <div class="post_bloc_section_loginForm">
+                    <form class="w-50 m-auto" action="add_post.php" method="POST">
+                        <fieldset class="p-20 ud-m-50">
+                            <legend class="uppercase">rediger un article</legend>
+                            <div class="input_group m-auto">                            
+                                <input class="w-100 p-10 ud-m-10" type="text" name="title" placeholder="Titre de votre article">
+
+                                <textarea class="w-100 p-10 ud-m-10" rows="20" name="content" placeholder="Votre article"></textarea>
+
+                                <select class="w-100 p-10 ud-m-10" name="category">
+                                    <?php foreach($allCategory as $allCategories): ?>
+                                        <option value="<?= $allCategories['category'] ?>"><?= $allCategories['category'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
+
+                                <input class="p-10 bg-c-black c-white" type="submit">
+                            </div>
+                        </fieldset>
+                    </form>
+                    <?php if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'writer'): ?>
+                        
+                        <form class="w-50 m-auto" action="edit_category.php" method="POST">
+                            <fieldset class="p-20 ud-m-50">
+                                <legend class="uppercase">categorie</legend>
+                                <input class="w-100 p-10 ud-m-10" type="text" name="category" placeholder="Ajouter une category">
+
+                                <input class="p-10 bg-c-black c-white" type="submit" value="Ajouter">
+                            </fieldset>
+                        </form>
+                    <?php endif ?>
+
+                    <?php if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moderateur'): ?>
+                        <nav class="bloc_admin_nam w-50 m-auto">
+                            <ul class="fl-jc-b normal-list">
+                                <li><a class="c-black" href="change_post.php"><h3>Modifier un article</h3></a></li>
+                                <li><a class="c-black" href="change_comment.php"><h3>Modifier un commentaire</h3></a></li>                            
+                            </ul>
+                        </nav>
+                    <?php endif ?>
+                    <?php if($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moderateur'): ?>
+                        <h2 class="ud-p-20">Les utilisateurs</h2>
+                        <table class="w-100">
+                            <thead class="bold uppercase">
+                                <tr>
+                                    <td class="w-20 ud-p-20">Nom</td>
+                                    <td class="w-20 ud-p-20">Prénom</td>
+                                    <td class="w-20 ud-p-20">Mail</td>
+                                    <td class="w-20 ud-p-20">Role</td>
+                                    <td class="w-10 ud-p-20"></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php foreach($allUser as $allUsers): ?>                                
+                                    <form action="update_user.php" method="POST">
+                                        <tr>
+                                            <td class="ud-p-10"><input type="text" name="firstName" value="<?= $allUsers['firstName'] ?>" ></td>
+                                            <td class="ud-p-10"><input type="text" name="lastName" value="<?= $allUsers['lastName'] ?>" ></td>
+                                            <td class="ud-p-10"><?= $allUsers['mail'] ?></td>
+                                            <td class="ud-p-10"><input type="text" name="role" value="<?= $allUsers['role'] ?>" ></td>
+                                            <td class="ud-p-10 fl-jc-b">
+                                                <input type="hidden" name="profiId" value="<?= $allUsers['id'] ?>">
+                                                <button type="submit">Mettre a jour</button>
+                                    </form>
+                                            <?php if($allUsers['role'] != 'admin'): ?>
+                                                <form action="delete_user.php" method="POST">
+                                                    <input type="hidden" name="profiId" value="<?= $allUsers['id'] ?>">
+                                                    <button type="submit" class="normal-link c-black"><i class="fas fa-trash-alt"></i></button>
+                                                </form>
+                                            <?php endif ?>                                                
+                                            </td>                                            
+                                        </tr>                                    
+                                    <?php endforeach ?>
+                                </tbody>
+                            </table>
+                        <?php endif ?>
+
+
+                    <?php if($_SESSION['role'] == 'admin'): ?>
+                        <h2 class="ud-p-20">Les moderateurs</h2>
+                        <table class="w-100">
+                            <thead class="bold uppercase">
+                                <tr>
+                                    <td class="w-20 ud-p-20">Nom</td>
+                                    <td class="w-20 ud-p-20">Prénom</td>
+                                    <td class="w-20 ud-p-20">Mail</td>
+                                    <td class="w-20 ud-p-20">Role</td>
+                                    <td class="w-10 ud-p-20"></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php foreach($allModo as $allModos): ?>                                
+                                    <form action="update_user.php" method="POST">
+                                        <tr>
+                                            <td class="ud-p-10"><input type="text" name="firstName" value="<?= $allModos['firstName'] ?>" ></td>
+                                            <td class="ud-p-10"><input type="text" name="lastName" value="<?= $allModos['lastName'] ?>" ></td>
+                                            <td class="ud-p-10"><?= $allModos['mail'] ?></td>
+                                            <td class="ud-p-10"><input type="text" name="role" value="<?= $allModos['role'] ?>" ></td>
+                                            <td class="ud-p-10 fl-jc-b">
+                                                <input type="hidden" name="profiId" value="<?= $allModos['id'] ?>">
+                                                <button type="submit">Mettre a jour</button>
+                                    </form>
+                                            <?php if($allModos['role'] != 'admin'): ?>
+                                                <form action="delete_user.php" method="POST">
+                                                    <input type="hidden" name="profiId" value="<?= $allModos['id'] ?>">
+                                                    <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                                                </form>
+                                                <?php endif ?>                                                
+                                            </td>
+                                        </tr>
+                                    
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    <?php endif ?>
+
+                    <?php if($_SESSION['role'] == 'admin'): ?>
+                        <h2 class="ud-p-20">Les moderateurs</h2>
+                        <table class="w-100">
+                            <thead class="bold uppercase">
+                                <tr>
+                                    <td class="w-20 ud-p-20">Nom</td>
+                                    <td class="w-20 ud-p-20">Prénom</td>
+                                    <td class="w-20 ud-p-20">Mail</td>
+                                    <td class="w-20 ud-p-20">Role</td>
+                                    <td class="w-10 ud-p-20"></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php foreach($allWriter as $allWriters): ?>                                
+                                    <form action="update_user.php" method="POST">
+                                        <tr>
+                                            <td class="ud-p-10"><input type="text" name="firstName" value="<?= $allWriters['firstName'] ?>" ></td>
+                                            <td class="ud-p-10"><input type="text" name="lastName" value="<?= $allWriters['lastName'] ?>" ></td>
+                                            <td class="ud-p-10"><?= $allWriters['mail'] ?></td>
+                                            <td class="ud-p-10"><input type="text" name="role" value="<?= $allWriters['role'] ?>" ></td>
+                                            <td class="ud-p-10 fl-jc-b">
+                                                <input type="hidden" name="profiId" value="<?= $allWriters['id'] ?>">
+                                                <button type="submit">Mettre a jour</button>
+                                    </form>
+                                            <?php if($allWriters['role'] != 'admin'): ?>
+                                                <form action="delete_user.php" method="POST">
+                                                    <input type="hidden" name="profiId" value="<?= $allWriters['id'] ?>">
+                                                    <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                                                </form>
+                                                <?php endif ?>   
+                                            </td>
+                                        </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    <?php endif ?>
+
+                    <?php if($_SESSION['role'] == 'admin'): ?>
+                        <h2 class="ud-p-20">Les administrateurs</h2>
+                        <table class="w-100">
+                            <thead class="bold uppercase">
+                                <tr>
+                                    <td class="w-20 ud-p-20">Nom</td>
+                                    <td class="w-20 ud-p-20">Prénom</td>
+                                    <td class="w-20 ud-p-20">Mail</td>
+                                    <td class="w-20 ud-p-20">Role</td>
+                                    <td class="w-10 ud-p-20"></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php foreach($allAdmin as $allAdmins): ?>                                
+                                    <form action="update_user.php" method="POST">
+                                        <tr>
+                                            <td class="ud-p-10"><?= $allAdmins['firstName'] ?></td>
+                                            <td class="ud-p-10"><?= $allAdmins['lastName'] ?></td>
+                                            <td class="ud-p-10"><?= $allAdmins['mail'] ?></td>
+                                            <td class="ud-p-10"><?= $allAdmins['role'] ?></td>
+                                            <td class="ud-p-10">    
+                                                <input type="hidden" name="profiId" value="<?= $allAdmins['id'] ?>"> 
+                                    </form>                                        
+                                            <form action="delete_user.php" method="POST">
+                                                <input type="hidden" name="profiId" value="<?= $allAdmins['id'] ?>">
+                                                <button class="normal-link c-black"><i class="fas fa-trash-alt"></i></button>
+                                            </form>
+                                                
+                                        </td>
+                                    </tr>                                    
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    <?php endif ?>
+
+                    
+                </div>
+            </section>
+        </div>
+    </div>
+<?php endif ?>

@@ -1,0 +1,26 @@
+<div class="container">
+    <section class="modify_article">
+        
+        <?php foreach($allPost as $allPosts): ?>
+            <form class="modify_article_form w-50 m-auto" action="make_change_post.php" method="POST">   
+                <p>id du post : <?= $allPosts['id'] ?> </p>
+                <div class="input_group ud-p-10">
+                    <label>Titre</label>
+                    <input class="w-100 p-10" type="text" name="title" value="<?= $allPosts['title'] ?>">
+                </div>
+
+                <div class="input_group ud-p-10">
+                    <label>Contenu</label>
+                    <textarea class="w-100 p-10" type="text" name="content" rows="10"><?= $allPosts['content'] ?></textarea>
+                </div>
+                <select name="category" class="w-100 p-10">
+                    <?php foreach($allCategory as $allCategorys): ?>
+                        <option  value="<?= $allCategorys['category'] ?>"><?= $allCategorys['category'] ?></option>
+                    <?php endforeach ?>
+                </select>
+                <input type="hidden" name="id" value="<?= $allPosts['id'] ?>">
+                <button class="ud-m-10 p-10" type="submit">Modifier</button>
+            </form>
+        <?php endforeach ?>
+    </section>
+</div>  

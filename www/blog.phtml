@@ -1,0 +1,21 @@
+<div class="container">
+    <section class="blog_section">
+        <div class="blog_section_post w-60">
+            <?php foreach($allPost as $allPosts): ?>
+                <div id="<?= $allPosts['id'] ?>" class="post ud-m-50">               
+                    
+                    <h2><?= $allPosts['title'] ?></h2>
+
+                    <p class="ud-p-10">Article rédigé par : <strong><?= $allPosts['author'] ?></strong> le : <strong><?= $allPosts['publish_date'] ?></strong></p>
+
+                    <p><?= substr($allPosts['content'], 0, 200) ?> [...] <a href="show_post.php?id=<?= $allPosts['id'] ?>">afficher la suite</a></p>
+
+                    <div class="comment">
+                        <h3 class="dp-block ud-m-10 c-black"><a class="c-black" href="show_post.php?id=<?= $allPosts['id'] ?>">Ajouter un commentaire</a></h3>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </section>
+</div>
+

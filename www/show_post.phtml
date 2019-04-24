@@ -1,0 +1,39 @@
+<div class="container">
+    <section class="blog_section">
+        <div class="blog_section_post w-60">
+  
+                <div class="post ud-m-50">               
+                    
+                    <h2><?= $postById['title'] ?></h2>
+
+                    <p class="ud-p-10">Article rédigé par : <strong><?= $postById['author'] ?></strong> le : <strong><?= $postById['publish_date'] ?></strong></p>
+
+                    <p><?= $postById['content'] ?></p>
+
+                    <div class="comment">
+                        <div class="show_comment m-50">
+                            <?php if($commentById != null): ?>
+                                <h2>Commentaires</h2>
+                                <?php foreach($commentById as $commentByIds): ?>
+                                    <h3><?= $commentByIds['nickName'] ?></h3>
+                                    <p><?= $commentByIds['content'] ?></p>
+                                    <p><?= $commentByIds['publish_date'] ?></p>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        </div>
+
+                        <h3 class="dp-block ud-m-10 c-black">Ajouter un commentaire :</h3>
+
+                        <form action="add_comment.php" method="POST">
+                            <input class="w-100 p-10 ud-m-10" type="text" name="nickName" placeholder="Votre pseudo">
+                            <textarea class="w-100 p-10" placeholder="Votre commentaire" name="comment" rows="5"></textarea>
+
+                            <input type="hidden" value="<?= $postById['id'] ?>" name="postId">
+                            <button class="p-10 bg-c-black c-white" type="submit">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+
+        </div>
+    </section>
+</div>

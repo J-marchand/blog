@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="user_bloc">
+        <section class="user_bloc_section">
+            <div class="user_bloc_section_loginForm">
+                <form class="w-50 m-auto" action="login.php" method="POST">
+                <p>Créez vous un compte pour devenir un simple utilisateur. Vous pourrez uniquement lire et commenter les articles du blog.</p>
+                    <div class="ud-p-20">    
+                        <p class="ud-p-20">L'admin a majoritairement tous les droits sur le site. Il peut modifier un article, modifier ou supprimer les commentaires malveillant. Il a aussi vu sur tous les utilisateurs du site, il peut modifier le role de chaque utilisateurs ainsi que que supprimer de la base de données les accès liés à l'utlisateur.</p>
+                    </div>
+                        <p>Pour vous connecter en temps qu'admin, entrez l'adresset le mot de passe suivant : admin@admin.com / admin </p>
+                    <div class="ud-p-20">
+                        <p class="ud-p-20">Le moderateur lui aura les memes droit d'administation qu'un admin, mais ne pourra que mettre a jour le role des utlisateur ainsi que leur supprimer leurs accès de connexion.</p>
+                    </div>
+                        <p>Pour vous connecter en temps que moderateur, entrez l'adresse et le mot de passe suivant : moderateur@moderateur.com / moderateur </p>
+                    <div class="ud-p-20">
+                        <p class="ud-p-20">Comme son nom l'indique le redacteur ne pourra que et uniquement rediger un article.</p>
+                    </div>
+                        <p>Pour vous connecter en temps que redacteur, entrez l'adresse et le mot de passe suivant : writer@writer.com / writer </p>
+                    <fieldset class="p-20 ud-m-50">
+                        
+                        <legend class="uppercase">connexion</legend>
+                        <div class="input_group m-auto">                            
+                            <input class="w-100 p-10 ud-m-10" type="email" name="mail" placeholder="Saisissez votre mail">
+
+                            <input class="w-100 p-10 ud-m-10" type="password" name="password" placeholder="Saisissez votre mot de passe">
+
+                            <input class="p-10 bg-c-black c-white" type="submit">
+                        </div>
+                    </fieldset>
+                </form>
+
+                <form class="w-50 m-auto" action="register.php" method="POST">
+                    <fieldset class="p-20">
+                        <legend class="uppercase">inscription</legend>
+                        <div class="input_group m-auto">                            
+                            <input class="w-100 p-10 ud-m-10" type="email" name="mail" placeholder="Entrez votre adresse mail">
+
+                            <input class="w-100 p-10 ud-m-10" type="password" name="password" placeholder="Entrez un mot de passe">
+
+                            <div class="input_group_fl">
+                                <input class="w-50 p-10 ud-m-10" type="text" name="firstName" placeholder="Saisissez votre prénom">
+
+                                <input class="w-50 p-10 ud-m-10" type="text" name="lastName" placeholder="Saisissez votre nom">
+                            </div>
+
+                            <input class="p-10 bg-c-black c-white" type="submit">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
